@@ -12,7 +12,9 @@ function App() {
       <Time></Time>
       <br></br>
       <Temperature currentTemp={69} feelsLikeTemp={67} highTemp={84} lowTemp={57}></Temperature>
+      <br></br>
       <Humidity humidity={62}></Humidity>
+      <br></br>
       <Wind speed={4} direction={340}></Wind>
     </div>
   );
