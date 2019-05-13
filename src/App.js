@@ -13,30 +13,27 @@ class App extends Component {
     super(props);
     this.state = {
       weatherData: {},
-      loaded: false
+      loaded: false,
+      error: null
     }
   }
 
   componentDidMount() {
-    fetch('https://api.openweathermap.org/data/2.5/weather?zip=15232,us&units=imperial&APPID=3cb6de73c631b0f4f5c720b82cbb6384')
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            weatherData: result,
-            loaded: true
-          });
-        }
-      )
+    this.updateData();
+    this.updateInterval = setInterval(() => this.updateData(), 60000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.updateInterval);
   }
 
   render() {
-    if (this.state.loaded)
+    if (this.state.loaded && !this.state.error)
       return (
         <div className="App">
           <Time></Time>
           <br></br>
-          <Temperature currentTemp={this.state.weatherData.main.temp} feelsLikeTemp={0} highTemp={0} lowTemp={0}></Temperature>
+          <Temperature currentTemp={this.state.weatherData.main.temp} humidity={this.state.weatherData.main.humidity} windSpeed={this.state.weatherData.wind.speed} highTemp={0} lowTemp={0}></Temperature>
           <br></br>
           <Humidity humidity={this.state.weatherData.main.humidity}></Humidity>
           <br></br>
@@ -46,6 +43,26 @@ class App extends Component {
         </div>
       );
     else return null;
+  }
+
+  updateData() {
+    console.log("Refreshing");
+    fetch('https://api.openweathermap.org/data/2.5/weather?zip=15232,us&units=imperial&APPID=3cb6de73c631b0f4f5c720b82cbb6384')
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            weatherData: result,
+            loaded: true
+          });
+        },
+        (error) => {
+          this.setState({
+            loaded: true,
+            error
+          });
+        }
+      )
   }
 }
 

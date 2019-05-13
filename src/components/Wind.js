@@ -29,8 +29,8 @@ export class Wind extends Component {
 
         return (
             <div>
-                <div>{speed} mph {directionString} ({description})</div>
-                <i className="fas fa-arrow-up" style={arrowStyle}></i>
+                <div>{Math.round(speed)} mph {directionString} ({description})</div>
+                <span className="fas fa-arrow-up" style={arrowStyle} title={direction + " degrees"}></span>
             </div>
         );
     }
