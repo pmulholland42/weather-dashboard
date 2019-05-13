@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 export class Temperature extends Component {
     render() {
-        var fahrenheitTemp = this.props.currentTemp;
+        var fahrenheitTemp = Math.round(this.props.currentTemp);
         var celciusTemp = Math.round((fahrenheitTemp - 32) * 5 / 9);
         return (
             <div>

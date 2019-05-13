@@ -30,7 +30,7 @@ export class Wind extends Component {
         return (
             <div>
                 <div>{speed} mph {directionString} ({description})</div>
-                <i class="fas fa-arrow-up" style={arrowStyle}></i>
+                <i className="fas fa-arrow-up" style={arrowStyle}></i>
             </div>
         );
     }
