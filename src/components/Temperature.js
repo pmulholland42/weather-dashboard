@@ -17,13 +17,13 @@ export class Temperature extends Component {
 					+ 8.5282*Math.pow(10,-4)*fahrenheitTemp*humidity*humidity
 					- 1.99*Math.pow(10,-6)*fahrenheitTemp*fahrenheitTemp*humidity*humidity;
             feelsLikeDiv = (
-                <div>Heat index: {heatIndex}</div>
+                <div>Heat index: {Math.round(heatIndex)}° F</div>
             );
         } else if (fahrenheitTemp <= 40) {
             // This formula is copied from https://en.wikipedia.org/wiki/Wind_chill
             var windChill = 35.74 + (0.6215 * fahrenheitTemp) - (35.75 * Math.pow(windSpeed, 0.16)) + (0.4275 * fahrenheitTemp * Math.pow(windSpeed, 0.16));
             feelsLikeDiv = (
-                <div>Wind chill: {windChill}</div>
+                <div>Wind chill: {Math.round(windChill)}° F</div>
             );
         }
 

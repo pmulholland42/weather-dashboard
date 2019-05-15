@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import './App.css';
+import Moment from 'moment';
 
 import Time from './components/Time';
 import Temperature from './components/Temperature';
 import Humidity from './components/Humidity';
 import Pressure from './components/Pressure';
 import Wind from './components/Wind';
-import TemperatureGraph from './components/TemperatureGraph';
 import UVIndex from './components/UVIndex';
+import TemperatureGraph from './components/TemperatureGraph';
+import RainChanceGraph from './components/RainChanceGraph';
 
 class App extends Component {
 
@@ -20,7 +22,8 @@ class App extends Component {
       forecastLoaded: false,
       weatherHistory: [],
       uvIndex: 0,
-      error: null
+      error: null,
+      lastUpdateTime: Moment()
     }
   }
 
@@ -34,39 +37,56 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.currentLoaded && this.state.forecastLoaded && !this.state.error)
-      return (
-        <div className="App">
-          <Time></Time>
-          <br></br>
-          <Temperature currentTemp={this.state.currentWeather.main.temp} humidity={this.state.currentWeather.main.humidity} windSpeed={this.state.currentWeather.wind.speed} forecast={this.state.forecast.list}></Temperature>
-          <br></br>
-          <Humidity humidity={this.state.currentWeather.main.humidity}></Humidity>
-          <br></br>
-          <Pressure pressure={this.state.currentWeather.main.pressure}></Pressure>
-          <br></br>
-          <Wind speed={this.state.currentWeather.wind.speed} direction={this.state.currentWeather.wind.deg}></Wind>
-          <br></br>
-          <UVIndex uv={this.state.uvIndex}></UVIndex>
-          <br></br>
-          <TemperatureGraph history={this.state.weatherHistory} forecast={this.state.forecast}></TemperatureGraph>
-        </div>
-      );
-    else return null;
+
+    //if (this.state.currentLoaded && this.state.forecastLoaded && !this.state.error)
+
+    const {temp, humidity, pressure} = this.state.currentWeather.main ? this.state.currentWeather.main : 0;
+    const { speed, direction } = this.state.currentWeather.wind ? this.state.currentWeather.wind : 0;
+    const forecast = this.state.forecast.list ? this.state.forecast.list : [];
+
+    return (
+      <div className="App">
+        <Time></Time>
+        <div>Last updated: {this.state.lastUpdateTime.format("h:mm A")}</div>
+        <br></br>
+        <Temperature currentTemp={temp} humidity={humidity} windSpeed={speed}></Temperature>
+        <br></br>
+        <Humidity humidity={humidity}></Humidity>
+        <br></br>
+        <Pressure pressure={pressure}></Pressure>
+        <br></br>
+        <Wind speed={speed} direction={direction}></Wind>
+        <br></br>
+        <UVIndex uv={this.state.uvIndex}></UVIndex>
+        <br></br>
+        <TemperatureGraph history={this.state.weatherHistory} forecast={forecast} width={675} height={300}></TemperatureGraph>
+        <br></br>
+        <RainChanceGraph history={this.state.weatherHistory} forecast={forecast} width={675} height={300}></RainChanceGraph>
+      </div>
+    );
   }
 
   updateData() {
-    console.log("Refreshing");
     // Get current weather
     fetch('https://api.openweathermap.org/data/2.5/weather?zip=15232,us&units=imperial&APPID=3cb6de73c631b0f4f5c720b82cbb6384')
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({
-            currentWeather: result,
-            currentLoaded: true
-          });
-          this.state.weatherHistory.push({temperature: result.main.temp})
+          if (result && result.cod && (result.cod === 200 || result.cod === "200")) {
+            this.setState({
+              currentWeather: result,
+              currentLoaded: true,
+              lastUpdateTime: Moment(),
+              weatherHistory: this.state.weatherHistory.concat({
+                time: Moment(),
+                temperature: result.main.temp
+              })
+            });
+            console.log("Refreshed at " + Moment().format("h:mm:ss A"));
+          }
+          else {
+            console.log("Error" + result.cod +" at " + Moment().format("h:mm:ss A"));
+          }
         },
         (error) => {
           this.setState({
@@ -81,10 +101,12 @@ class App extends Component {
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({
-            forecast: result,
-            forecastLoaded: true
-          });
+          if (result && result.cod && (result.cod === 200 || result.cod === "200")) {
+            this.setState({
+              forecast: result,
+              forecastLoaded: true
+            });
+          }
         },
         (error) => {
           this.setState({
