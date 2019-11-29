@@ -39,6 +39,8 @@ class App extends Component {
 
   render() {
     const {temp, humidity, pressure} = this.state.currentWeather.main ? this.state.currentWeather.main : 0;
+    const description = this.state.currentWeather.weather ? this.state.currentWeather.weather[0].description : "unknown";
+    const iconId = this.state.currentWeather.weather ? this.state.currentWeather.weather[0].icon : "01d";
     const {speed, deg} = this.state.currentWeather.wind ? this.state.currentWeather.wind : 0;
     const forecast = this.state.forecast.list ? this.state.forecast.list : [];
 
@@ -59,6 +61,9 @@ class App extends Component {
           </div>
 
           <div className="component-group" style={{padding: "50px 0"}}>
+            <div className="component">
+              <WeatherDescription description={description} iconId={iconId}></WeatherDescription>
+            </div>
             <div className="component">
               <Humidity humidity={humidity}></Humidity>
             </div>
