@@ -26,7 +26,7 @@ export class TemperatureGraph extends Component {
 
         return (
             <div>
-                <Graph ref="graph" width={600} height={240} data={temperatureData} color="red" timeScale="day" yUnit="°"></Graph>
+                <Graph ref="graph" width={350} height={180} data={temperatureData} color="red" timeScale="day" yUnit="°"></Graph>
             </div>
         );
     }

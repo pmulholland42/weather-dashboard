@@ -43,17 +43,7 @@ class App extends Component {
     const forecast = this.state.forecast.list ? this.state.forecast.list : [];
 
     return (
-      <div>
-        <div className="top-half">
-
-          <div className="component-group">
-            <div className="component">
-              <TemperatureGraph history={this.state.weatherHistory} forecast={forecast}></TemperatureGraph>
-            </div>
-            <div className="component">
-              <RainChanceGraph history={this.state.weatherHistory} forecast={forecast}></RainChanceGraph>
-            </div>
-          </div>
+      <div class="container">
 
           <div className="component-group">
             <div className="component">
@@ -64,7 +54,7 @@ class App extends Component {
               <Temperature currentTemp={temp} humidity={humidity} windSpeed={speed}></Temperature>
             </div>
             <div className="component">
-              <WeatherDescription></WeatherDescription>
+              <TemperatureGraph history={this.state.weatherHistory} forecast={forecast}></TemperatureGraph>
             </div>
           </div>
 
@@ -82,11 +72,6 @@ class App extends Component {
               <UVIndex uv={this.state.uvIndex}></UVIndex>
             </div>
           </div>
-
-        </div>
-
-        <div className="bottom-half">
-        </div>
       </div>
     );
   }
