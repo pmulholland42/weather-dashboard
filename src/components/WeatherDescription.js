@@ -25,7 +25,7 @@ export class WeatherDescription extends Component {
 
     render() {
 
-        var imageSource = `https://openweathermap.org/img/wn/${this.props.iconId}@2x.png`;
+        var imageSource = `/icons/${this.props.iconId}.png`;
         var uppercaseDescription = this.props.description.charAt(0).toUpperCase() + this.props.description.slice(1);
 
         return (
