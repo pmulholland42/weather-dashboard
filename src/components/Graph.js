@@ -39,8 +39,8 @@ export class Graph extends Component {
         const canvas = this.refs.graphCanvas;
         const ctx = canvas.getContext("2d");
         ctx.clearRect(0, 0, width, height);
-        const graphOffsetX = 32;
-        const graphOffsetY = 32;
+        const graphOffsetX = 28;
+        const graphOffsetY = 28;
         const graphWidth = width - graphOffsetX;
         const graphHeight = height - graphOffsetY;
 

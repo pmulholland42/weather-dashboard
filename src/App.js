@@ -10,7 +10,6 @@ import Pressure from './components/Pressure';
 import Wind from './components/Wind';
 import UVIndex from './components/UVIndex';
 import TemperatureGraph from './components/TemperatureGraph';
-import RainChanceGraph from './components/RainChanceGraph';
 
 class App extends Component {
 
