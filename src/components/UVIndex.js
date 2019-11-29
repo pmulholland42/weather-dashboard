@@ -9,7 +9,10 @@ export class UVIndex extends Component {
         if (uv > 7.5) index = "Very high";
         if (uv > 10.5) index = "Extreme";
         return (
-            <div>UV Index: {uv} ({index})</div>
+            <div>
+                <div>UV Index:</div>
+                <div>{uv} ({index})</div>
+            </div>
         );
     }
 }

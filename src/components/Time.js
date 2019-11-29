@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import '../App.css';
 import Moment from 'moment';
 
 export class Time extends Component {

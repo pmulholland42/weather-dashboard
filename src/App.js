@@ -4,6 +4,7 @@ import Moment from 'moment';
 
 import Time from './components/Time';
 import Temperature from './components/Temperature';
+import WeatherDescription from './components/WeatherDescription';
 import Humidity from './components/Humidity';
 import Pressure from './components/Pressure';
 import Wind from './components/Wind';
@@ -37,31 +38,55 @@ class App extends Component {
   }
 
   render() {
-
-    //if (this.state.currentLoaded && this.state.forecastLoaded && !this.state.error)
-
     const {temp, humidity, pressure} = this.state.currentWeather.main ? this.state.currentWeather.main : 0;
-    const { speed, direction } = this.state.currentWeather.wind ? this.state.currentWeather.wind : 0;
+    const {speed, deg} = this.state.currentWeather.wind ? this.state.currentWeather.wind : 0;
     const forecast = this.state.forecast.list ? this.state.forecast.list : [];
 
     return (
-      <div className="App">
-        <Time></Time>
-        <div>Last updated: {this.state.lastUpdateTime.format("h:mm A")}</div>
-        <br></br>
-        <Temperature currentTemp={temp} humidity={humidity} windSpeed={speed}></Temperature>
-        <br></br>
-        <Humidity humidity={humidity}></Humidity>
-        <br></br>
-        <Pressure pressure={pressure}></Pressure>
-        <br></br>
-        <Wind speed={speed} direction={direction}></Wind>
-        <br></br>
-        <UVIndex uv={this.state.uvIndex}></UVIndex>
-        <br></br>
-        <TemperatureGraph history={this.state.weatherHistory} forecast={forecast} width={675} height={300}></TemperatureGraph>
-        <br></br>
-        <RainChanceGraph history={this.state.weatherHistory} forecast={forecast} width={675} height={300}></RainChanceGraph>
+      <div>
+        <div className="top-half">
+
+          <div className="component-group">
+            <div className="component">
+              <TemperatureGraph history={this.state.weatherHistory} forecast={forecast}></TemperatureGraph>
+            </div>
+            <div className="component">
+              <RainChanceGraph history={this.state.weatherHistory} forecast={forecast}></RainChanceGraph>
+            </div>
+          </div>
+
+          <div className="component-group">
+            <div className="component">
+              <Time></Time>
+              Last updated: {this.state.lastUpdateTime.format("h:mm A")}
+            </div>
+            <div className="component">
+              <Temperature currentTemp={temp} humidity={humidity} windSpeed={speed}></Temperature>
+            </div>
+            <div className="component">
+              <WeatherDescription></WeatherDescription>
+            </div>
+          </div>
+
+          <div className="component-group" style={{padding: "50px 0"}}>
+            <div className="component">
+              <Humidity humidity={humidity}></Humidity>
+            </div>
+            <div className="component">
+              <Pressure pressure={pressure}></Pressure>
+            </div>
+            <div className="component">
+              <Wind speed={speed} direction={deg}></Wind>
+            </div>
+            <div className="component">
+              <UVIndex uv={this.state.uvIndex}></UVIndex>
+            </div>
+          </div>
+
+        </div>
+
+        <div className="bottom-half">
+        </div>
       </div>
     );
   }

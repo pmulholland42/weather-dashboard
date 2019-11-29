@@ -23,7 +23,7 @@ export class RainChanceGraph extends Component {
 
         return (
             <div>
-                <Graph ref="graph" width={675} height={300} data={rainData} color="blue" timeScale="day" yUnit="%" yMax={100} yMin={0}></Graph>
+                <Graph ref="graph" width={600} height={240} data={rainData} color="blue" timeScale="day" yUnit="%" yMax={100} yMin={0}></Graph>
             </div>
         );
     }

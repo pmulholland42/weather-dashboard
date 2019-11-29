@@ -7,6 +7,7 @@ export class Temperature extends Component {
         var fahrenheitTemp = currentTemp;
         var celciusTemp = (fahrenheitTemp - 32) * 5 / 9;
 
+
         var feelsLikeDiv = (<div></div>)
         if (fahrenheitTemp >= 80) {
             // This formula is copied from http://www.maineharbors.com/weather/convert3.htm
@@ -29,7 +30,7 @@ export class Temperature extends Component {
 
         return (
             <div>
-                <div>{Math.round(fahrenheitTemp)}° F / {Math.round(celciusTemp)}° C</div>
+                <div><span className="fahrenheit">{Math.round(fahrenheitTemp)}° F</span><span className="celcius"> / {Math.round(celciusTemp)}° C</span></div>
                 {feelsLikeDiv}
             </div>
         );
