@@ -8,9 +8,9 @@ export class Graph extends Component {
         var data = this.props.data;
 
         // Filter the data based on time
-        /*data = data.filter(element => {
+        data = data.filter(element => {
             return Moment().isSame(element.time, timeScale);
-        });*/
+        });
 
         // Sort the data by time
         data.sort((a, b) => {
@@ -43,6 +43,10 @@ export class Graph extends Component {
         const graphOffsetY = 32;
         const graphWidth = width - graphOffsetX;
         const graphHeight = height - graphOffsetY;
+
+        ctx.fillStyle = "rgb(220, 220, 220)";
+        ctx.fillRect(graphOffsetX, 0, width, graphHeight);
+        ctx.fillStyle = "black";
 
         // Draw the borders of the graph
         ctx.strokeStyle = "black";
