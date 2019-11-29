@@ -18,8 +18,8 @@ export class Wind extends Component {
         var directionString = directions[(val % 16)];
 
         // Get the wind description based on the Beaufort scale
-        var beaufortDescriptions = ["Calm", "Light air", "Light breeze", "Gentle breeze", "Moderate breeze", "Fresh breeze", "Strong breeze",
-                                    "High wind", "Gale", "Strong gale", "Storm", "Violent storm", "Hurricane"];
+        var beaufortDescriptions = ["calm", "light air", "light breeze", "gentle breeze", "moderate breeze", "fresh breeze", "strong breeze",
+                                    "high wind", "gale", "strong gale", "storm", "violent storm", "hurricane"];
         var beaufortSpeeds = [1, 3, 7, 12, 18, 24, 31, 38, 46, 54, 63, 72]
         var beaufortNumber = 0;
         for (let s of beaufortSpeeds)
