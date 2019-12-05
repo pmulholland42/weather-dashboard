@@ -1,16 +1,15 @@
 
 body {
   overflow: hidden;
+  cursor: none;
 }
 
 .container {
   text-align: center;
   font-size: 16pt;
   display: flex;
-  width: 800px;
-  height: 480px;
   margin: auto;
-  border: 1px solid black;
+  height: 100vh;
   background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
 }
 

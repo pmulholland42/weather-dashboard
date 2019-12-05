@@ -4,6 +4,13 @@ import Graph from './Graph';
 
 export class TemperatureGraph extends Component {
 
+    constructor(props) {
+        super(props);
+        window.onresize = (event) => {
+            this.forceUpdate();
+        }
+    }
+
     render() {
         const {history, forecast} = this.props;
 
@@ -24,9 +31,12 @@ export class TemperatureGraph extends Component {
             })
         });
 
+        var graphWidth = Math.round(window.innerWidth / 2.5);
+        var graphHeight = graphWidth / 2;
+
         return (
             <div>
-                <Graph ref="graph" width={350} height={180} data={temperatureData} color="red" timeScale="day" yUnit="°"></Graph>
+                <Graph ref="graph" width={graphWidth} height={graphHeight} data={temperatureData} color="red" timeScale="day" yUnit="°"></Graph>
             </div>
         );
     }
