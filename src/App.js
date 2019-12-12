@@ -23,13 +23,26 @@ class App extends Component {
       weatherHistory: [],
       uvIndex: 0,
       error: null,
-      lastUpdateTime: Moment()
+      lastUpdateTime: Moment(),
+      sleepMode: false,
     }
   }
 
   componentDidMount() {
     this.updateData();
     this.updateInterval = setInterval(() => this.updateData(), 1000*60*5);
+
+    document.ondblclick = () => {
+      if (!this.state.sleepMode) {
+        this.setState({ sleepMode: true });
+        setTimeout(() => {
+          this.setState({ sleepMode: false });
+        }, 1000000)
+      } else {
+        this.setState({ sleepMode: false });
+      }
+    }
+
   }
 
   componentWillUnmount() {
@@ -43,41 +56,48 @@ class App extends Component {
     const {speed, deg} = this.state.currentWeather.wind ? this.state.currentWeather.wind : 0;
     const forecast = this.state.forecast.list ? this.state.forecast.list : [];
 
-    return (
-      <div class="container">
+    if (!this.state.sleepMode) {
+      return (
+        <div class="container">
+  
+            <div className="component-group">
+              <div className="component">
+                <Time></Time>
+                Last updated: {this.state.lastUpdateTime.format("h:mm A")}
+              </div>
+              <div className="component">
+                <Temperature currentTemp={temp} humidity={humidity} windSpeed={speed}></Temperature>
+              </div>
+              <div className="component">
+                <TemperatureGraph history={this.state.weatherHistory} forecast={forecast}></TemperatureGraph>
+              </div>
+            </div>
+  
+            <div className="component-group" style={{padding: "50px 0"}}>
+              <div className="component">
+                <WeatherDescription description={description} iconId={iconId}></WeatherDescription>
+              </div>
+              <div className="component">
+                <Humidity humidity={humidity}></Humidity>
+              </div>
+              <div className="component">
+                <Pressure pressure={pressure}></Pressure>
+              </div>
+              <div className="component">
+                <Wind speed={speed} direction={deg}></Wind>
+              </div>
+              <div className="component">
+                <UVIndex uv={this.state.uvIndex}></UVIndex>
+              </div>
+            </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="sleep"></div>
+      )
+    }
 
-          <div className="component-group">
-            <div className="component">
-              <Time></Time>
-              Last updated: {this.state.lastUpdateTime.format("h:mm A")}
-            </div>
-            <div className="component">
-              <Temperature currentTemp={temp} humidity={humidity} windSpeed={speed}></Temperature>
-            </div>
-            <div className="component">
-              <TemperatureGraph history={this.state.weatherHistory} forecast={forecast}></TemperatureGraph>
-            </div>
-          </div>
-
-          <div className="component-group" style={{padding: "50px 0"}}>
-            <div className="component">
-              <WeatherDescription description={description} iconId={iconId}></WeatherDescription>
-            </div>
-            <div className="component">
-              <Humidity humidity={humidity}></Humidity>
-            </div>
-            <div className="component">
-              <Pressure pressure={pressure}></Pressure>
-            </div>
-            <div className="component">
-              <Wind speed={speed} direction={deg}></Wind>
-            </div>
-            <div className="component">
-              <UVIndex uv={this.state.uvIndex}></UVIndex>
-            </div>
-          </div>
-      </div>
-    );
   }
 
   updateData() {
