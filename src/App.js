@@ -43,6 +43,21 @@ class App extends Component {
     clearInterval(this.updateInterval);
   }
 
+  componentDidUpdate(_, prevState) {
+    let shouldRefresh = false;
+    if (prevState.currentTab !== 0 && this.state.currentTab === 0) {
+      shouldRefresh = true;
+    }
+
+    if (prevState.sleepMode && !this.state.sleepMode) {
+      shouldRefresh = true;
+    }
+
+    if (shouldRefresh) {
+      this.updateData();
+    }
+  }
+
   render() {
     const { temp, humidity, pressure } = this.state.currentWeather.main
       ? this.state.currentWeather.main
