@@ -1,16 +1,45 @@
-
 body {
   overflow: hidden;
   cursor: none;
 }
 
-.container {
+.tab-switcher {
+  height: 100vh;
+  width: 64px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-switcher-tab {
+  flex: 1;
+  border-bottom: 1px solid grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radar-map-container {
+  width: calc(100% - 64px);
+}
+
+.ten-day-forecast-container {
+  width: calc(100% - 64px);
+  height: 100vh;
+}
+
+.dashboard-container {
   text-align: center;
   font-size: 16pt;
   display: flex;
   margin: auto;
   height: 100vh;
-  background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+  background-image: linear-gradient(
+    141deg,
+    #9fb8ad 0%,
+    #1fc8db 51%,
+    #2cb5e8 75%
+  );
+  width: calc(100% - 64px);
 }
 
 .sleep {
