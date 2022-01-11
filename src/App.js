@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { format } from "date-fns";
 import "./App.css";
-import Moment from "moment";
 import { Dashboard } from "./components/Dashboard";
 import { RadarMap } from "./components/RadarMap";
 import { TabSwitcher } from "./components/TabSwitcher";
@@ -17,7 +17,7 @@ class App extends Component {
       weatherHistory: [],
       uvIndex: 0,
       error: null,
-      lastUpdateTime: Moment(),
+      lastUpdateTime: new Date(),
       sleepMode: false,
       currentTab: 0,
     };
@@ -120,16 +120,16 @@ class App extends Component {
             this.setState({
               currentWeather: result,
               currentLoaded: true,
-              lastUpdateTime: Moment(),
+              lastUpdateTime: new Date(),
               weatherHistory: this.state.weatherHistory.concat({
-                time: Moment(),
+                time: new Date(),
                 temperature: result.main.temp,
               }),
             });
-            console.log("Refreshed at " + Moment().format("h:mm:ss A"));
+            console.log("Refreshed at " + format(new Date(), "h:mm:ss aa"));
           } else {
             console.log(
-              "Error" + result.cod + " at " + Moment().format("h:mm:ss A")
+              "Error" + result.cod + " at " + format(new Date(), "h:mm:ss aa")
             );
           }
         },

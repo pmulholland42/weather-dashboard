@@ -1,4 +1,5 @@
 import React from "react";
+import { format } from "date-fns";
 
 import Time from "./Time";
 import Temperature from "./Temperature";
@@ -15,7 +16,7 @@ export const Dashboard = (props) => {
       <div className="component-group">
         <div className="component">
           <Time></Time>
-          Last updated: {props.lastUpdateTime.format("h:mm A")}
+          Last updated: {format(props.lastUpdateTime, "h:mm aa")}
         </div>
         <div className="component">
           <Temperature

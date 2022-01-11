@@ -1,30 +1,33 @@
-import React, {Component} from 'react';
-import '../App.css';
-import Moment from 'moment';
+import React, { Component } from "react";
+import "../App.css";
+import { format } from "date-fns";
 
 export class Time extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { now: Moment() }
-    }
+  constructor(props) {
+    super(props);
+    this.state = { now: new Date() };
+  }
 
-    componentDidMount() {
-        this.updateInterval = setInterval(() => this.setState({ now: Moment() }), 1000);
-    }
+  componentDidMount() {
+    this.updateInterval = setInterval(
+      () => this.setState({ now: new Date() }),
+      1000
+    );
+  }
 
-    componentWillUnmount() {
-        clearInterval(this.updateInterval);
-    }
+  componentWillUnmount() {
+    clearInterval(this.updateInterval);
+  }
 
-    render() {
-        var now = this.state.now;
-        return (
-            <div>
-                <div>{now.format('dddd, MMMM D')}</div>
-                <div>{now.format('h:mm:ss A')}</div>
-            </div>
-        );
-    }
+  render() {
+    const now = this.state.now;
+    return (
+      <div>
+        <div>{format(now, "eeee, MMMM d")}</div>
+        <div>{format(now, "h:mm:ss aa")}</div>
+      </div>
+    );
+  }
 }
 
 export default Time;
