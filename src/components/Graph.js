@@ -4,6 +4,7 @@ import {
   startOfDay,
   differenceInMilliseconds,
   isAfter,
+  compareAsc,
 } from "date-fns";
 
 export class Graph extends Component {
@@ -19,7 +20,7 @@ export class Graph extends Component {
 
     // Sort the data by time
     data.sort((a, b) => {
-      return a.time.diff(b.time);
+      return compareAsc(a.time, b.time);
     });
 
     // Get the max and min Y values, if they are not specified
