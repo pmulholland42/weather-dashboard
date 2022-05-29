@@ -26,7 +26,7 @@ export class TemperatureGraph extends Component {
     });
     forecast.forEach((t) => {
       temperatureData.push({
-        time: new Date(t.dt),
+        time: new Date(t.dt_txt),
         value: t.main.temp,
       });
     });
