@@ -1,3 +1,47 @@
+## About
+
+This is a simple weather app I designed to run on my Rasperry Pi. It displays the following information about the weather, updated every 5 minutes:
+
+- Temperature (both Fahrenheit and Celcius)
+- Description (e.g. "Partly Cloudy", "Thunderstorm")
+- Humidity
+- Air pressure
+- Wind speed and direction
+- UV index
+
+In addition to the live current weather stats, it displays a graph of the forecasted temperature throughout the day. The high and low temperatures for the day can be seen from the labels on the y-axis of the graph.
+
+There are also two other tabs on the screen, which are works in progress: radar and 10-day forecast. The radar feature is not performant enough to run well on the Raspberry Pi, so it needs to be re-implemented. The 10-day forecast feature is simply not implemented yet (coming soon!TM).
+
+## Usage
+
+To run the app, run `npm start` from the root directory, then open `localhost:3000` in your browser of choice.
+
+The app is designed to run on an 800x400 pixel display, with the browser in fullscreen mode. It should work fine on most screen sizes though, since the CSS uses flexbox for almost everything.
+
+If the display is too bright at night, you can triple tap or triple click the screen to turn it black. Triple tap again to turn it back on.
+
+### Setting up the wall display
+
+You will need:
+- A Raspberry Pi - I'm using a [Raspberry Pi 3 - Model B+](https://www.adafruit.com/product/3775) but any Pi with wifi should work.
+- A microSD card
+- A display - preferably touchscreen and 800x400. I'm using [this one](https://www.newark.com/raspberry-pi/raspberrypi-display/sbc-raspberry-pi-board/dp/24AJ1828).
+- A case for the Pi. This is optional but recommended. I'm using [this one](https://www.adafruit.com/product/2258).
+- A 2.5 amp, 5 volt Micro-USB power adapter
+- Command strips
+
+1. Set up the Raspberry Pi with the microSD card.
+2. Connect the display to the Raspberry Pi using the connectors included with the display.
+3. Put the Raspberry Pi in the case.
+4. Connect the power adapter to the display.
+5. Mount both the display and Pi to the wall. I used two command strips for the display and one for the Pi and it holds fine.
+6. Plug in the power adapter to the wall.
+7. Clone this repository on the Raspberry Pi and follow above instructions for running the app.
+8. Put the browser in full screen mode and enjoy checking the weather!
+
+##
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
