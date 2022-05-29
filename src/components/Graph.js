@@ -75,9 +75,10 @@ export class Graph extends Component {
     ctx.stroke();
 
     // Display the max and min Y values
+    ctx.font = "18px Arial";
+    ctx.fillText(yMax + yUnit, 0, 15);
+    ctx.fillText(yMin + yUnit, 0, height - graphOffsetY - 5);
     ctx.font = "14px Arial";
-    ctx.fillText(yMax + yUnit, 2, 15);
-    ctx.fillText(yMin + yUnit, 2, height - graphOffsetY - 5);
 
     // Draw horizontal lines
     const yRange = yMax - yMin;
